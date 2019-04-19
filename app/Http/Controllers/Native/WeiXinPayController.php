@@ -175,20 +175,21 @@ class WeiXinPayController extends Controller
         $arr=json_decode(json_encode($xml),true);
         file_put_contents("/tmp/aaa.log",var_export($arr,true),FILE_APPEND);
         $oldSign=$arr['sign'];
-        $newSign=$this->MakeSign();
-        unset($sign);
-        //print_r($arr);exit;
-        if($oldSign==$newSign){      //微信支付成功回调
-            //验证签名      //签名验证成功
-                file_put_contents("/tmp/sign.log",$oldSign,FILE_APPEND);
-                file_put_contents("/tmp/sign.log",$newSign,FILE_APPEND);
-                $order_number=$arr['out_trade_no'];
-                DB::table('order')->where('order_number',$order_number)->update(['order_status'=>2,'pay_status'=>2]);
-                DB::table('order_detail')->where('order_number',$order_number)->update(['goods_status'=>2]);
-
-        }
-        $response = '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
-        echo $response;
+        $order_number=$arr['out_trade_no'];
+        DB::table('order')->where('order_number',$order_number)->update(['order_status'=>2,'pay_status'=>2]);
+        DB::table('order_detail')->where('order_number',$order_number)->update(['goods_status'=>2]);
+//        $newSign=$this->MakeSign();
+//        unset($sign);
+//        //print_r($arr);exit;
+//        if($oldSign==$newSign){      //微信支付成功回调
+//            //验证签名      //签名验证成功
+//                file_put_contents("/tmp/sign.log",$oldSign,FILE_APPEND);
+//                file_put_contents("/tmp/sign.log",$newSign,FILE_APPEND);
+//
+//
+//        }
+//        $response = '<xml><return_code><![CDATA[SUCCESS]]></return_code><return_msg><![CDATA[OK]]></return_msg></xml>';
+//        echo $response;
     }
 
 }
