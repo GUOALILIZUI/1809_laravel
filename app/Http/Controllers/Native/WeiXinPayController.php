@@ -39,8 +39,6 @@ class WeiXinPayController extends Controller
         $this->SetSign();
 
         $xml=$this->ToXml();  //将数组转为xml
-        $sign=$xml->sign;
-//        print_r($xml);exit;
 
         $res=$this->postXmlCurl($xml,$this->placeUrl,$useCert=false,$second=30);
         $data=simplexml_load_string($res);
