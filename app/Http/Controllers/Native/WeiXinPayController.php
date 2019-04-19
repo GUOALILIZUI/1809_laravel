@@ -181,8 +181,8 @@ class WeiXinPayController extends Controller
             if($sign){       //签名验证成功
                 file_put_contents("/tmp/sign.log",$sign,FILE_APPEND);
                 $order_number=$arr['out_trade_no'];
-                DB::table('order')->where('order_number',$arr['out_trade_no'])->update(['pay_do'=>2,'order_status'=>2,'pay_status'=>2]);
-                DB::table('order_detail')->where('order_number',$arr['out_trade_no'])->update(['pay_do'=>2,'goods_status'=>2]);
+                DB::table('order')->where('order_number',$arr['out_trade_no'])->update(['order_status'=>2,'pay_status'=>2]);
+                DB::table('order_detail')->where('order_number',$arr['out_trade_no'])->update(['goods_status'=>2]);
             }else{
                 //TODO 验签失败
                 echo '验签失败，IP: '.$_SERVER['REMOTE_ADDR'];
