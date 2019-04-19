@@ -13,7 +13,7 @@ class WeiXinPayController extends Controller
     public $backUrl="http://1809guomingyang.comcto.com/payBack";  // 支付回调
 
     /**微信支付测试*/
-    public function NativePay(Request $request){
+    public function NativePay(Request $request ){
         //支付账号
         $appId='wxd5af665b240b75d4';
         $mchId='1500086022';
@@ -39,7 +39,8 @@ class WeiXinPayController extends Controller
         $this->SetSign();
 
         $xml=$this->ToXml();  //将数组转为xml
-        //print_r($xml);exit;
+        $sign=$xml->sign;
+//        print_r($xml);exit;
 
         $res=$this->postXmlCurl($xml,$this->placeUrl,$useCert=false,$second=30);
         $data=simplexml_load_string($res);
@@ -172,12 +173,12 @@ class WeiXinPayController extends Controller
         //记录日志
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('logs/wx_pay_notice.log',$log_str,FILE_APPEND);
-        $xml = simplexml_load_string($data);
-        $arr=json_decode(json_encode($xml));
+        $xml = simplexml_load_string($data,'SimpleXMLElement',LIBXML_NOCDATA);
+        $arr=json_decode(json_encode($xml),true);
+        file_put_contents("/tmp/aaa.log",var_export($arr,true),FILE_APPEND);
         $oldSign=$arr['sign'];
         $newSign=$this->MakeSign();
         unset($sign);
-
         //print_r($arr);exit;
         if($oldSign==$newSign){      //微信支付成功回调
             //验证签名      //签名验证成功
