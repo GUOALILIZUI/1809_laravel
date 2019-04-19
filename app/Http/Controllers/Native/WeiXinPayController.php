@@ -10,7 +10,7 @@ class WeiXinPayController extends Controller
 {
     /**消息拼接*/
     public $placeUrl="https://api.mch.weixin.qq.com/pay/unifiedorder";  // 统一下单接口
-    public $backUrl="http://host.laravel.com/payBack";  // 支付回调
+    public $backUrl="http://1809guomingyang.comcto.com/payBack";  // 支付回调
 
     /**微信支付测试*/
     public function NativePay(Request $request){
@@ -173,12 +173,16 @@ class WeiXinPayController extends Controller
         $log_str = date('Y-m-d H:i:s') . "\n" . $data . "\n<<<<<<<";
         file_put_contents('logs/wx_pay_notice.log',$log_str,FILE_APPEND);
         $xml = simplexml_load_string($data);
+        $arr=json_decode(json_encode($xml));
+        //print_r($arr);exit;
         if($xml->result_code=='SUCCESS' && $xml->return_code=='SUCCESS'){      //微信支付成功回调
             //验证签名
             $sign = true;
             if($sign){       //签名验证成功
-                //TODO 逻辑处理  订单状态更新
-//                DB::table
+                file_put_contents("/tmp/sign.log",$sign,FILE_APPEND);
+                $order_number=$arr['out_trade_no'];
+                DB::table('order')->where('order_number',$arr['out_trade_no'])->update(['pay_do'=>2,'order_status'=>2,'pay_status'=>2]);
+                DB::table('order_detail')->where('order_number',$arr['out_trade_no'])->update(['pay_do'=>2,'goods_status'=>2]);
             }else{
                 //TODO 验签失败
                 echo '验签失败，IP: '.$_SERVER['REMOTE_ADDR'];
