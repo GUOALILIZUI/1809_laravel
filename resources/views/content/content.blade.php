@@ -101,6 +101,9 @@
                 <!--揭晓倒计时-->
                 <div id="divLotteryTime" class="Countdown-con">
                     <p class="declare">声明：所有商品及活动均与苹果公司（Apple Inc）无关。</p>
+                    <div>
+                        <div id="qrcode"></div>
+                    </div>
                     <div class="state">
                         <em></em>
                         <span>我已阅读《潮购声明》</span>
@@ -248,6 +251,8 @@
 <script src="http://cdn.bootcss.com/flexslider/2.6.2/jquery.flexslider.min.js"></script>
 <script src="js/swiper.min.js"></script>
 <script src="js/photo.js" charset="utf-8"></script>
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/qrcode.min.js"></script>
 <script>
     $(function () {  
         $('.hotimg').flexslider({   
@@ -318,6 +323,9 @@
 
 </body>
 </html>
+<script>
+    new QRCode(document.getElementById("qrcode"),"{{$code_url}}")
+</script>
 <script src="layui/layui.js"></script>
 <script>
     $(function(){

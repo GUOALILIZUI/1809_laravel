@@ -35,8 +35,9 @@ class WeiXinPayController extends Controller
             'trade_type'=>'NATIVE'  //交易类型
         ];
 
-        $this->values=[];
-        $this->values=$order_info;
+        $arr=[];
+        $arr=$order_info;
+        //print_r($this->values);exit;
         $this->SetSign();
 
         $xml=$this->ToXml();  //将数组转为xml
@@ -134,11 +135,11 @@ class WeiXinPayController extends Controller
 
     }
 
-    private function MakeSign()
+    private function MakeSign($arr)
     {
         $key='7c4a8d09ca3762af61e59520943AB26Q';
         //签名步骤一：按字典序排序参数
-        ksort($this->values);
+        ksort($arr);
         $string = $this->ToUrlParams();
         //签名步骤二：在string后加入KEY
         $string = $string . "&key=$key";

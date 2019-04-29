@@ -48,7 +48,8 @@ class ContentController extends Controller
         ];
         $numb=Cart::where($where)->pluck('buy_num')->toArray();
         $numb1=array_sum($numb);
-        return view('content.content',['arr'=>$arr,'numb1'=>$numb1]);
+        $code_url = "https" . '://' . $_SERVER['HTTP_HOST'] .$_SERVER['REQUEST_URI'];
+        return view('content.content',['arr'=>$arr,'numb1'=>$numb1,'code_url'=>$code_url]);
     }
 
     //数据
