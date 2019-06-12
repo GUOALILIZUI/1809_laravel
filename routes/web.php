@@ -1,77 +1,5 @@
 <?php
 
-Route::get('index','IndexController@index');
-Route::get('register','IndexController@register');
-Route::get('login','IndexController@login');
-Route::post('add','IndexController@add');
-Route::post('log','IndexController@log');
-Route::post('t1','IndexController@t1');
-Route::any('like','IndexController@adddo');
-Route::any('itoKen','IndexController@itoKen');
-Route::any('ishow','IndexController@ishow');
-Route::any('accessToken','IndexController@accessToken');
-Route::any('hello','IndexController@hello');
-
-
-Route::get('demo','OrderController@demo');
-Route::any('all','Detail\DetailController@all');
-Route::any('catedo','Detail\DetailController@catedo');
-Route::any('content','Content\ContentController@content');
-Route::any('half','Content\ContentController@half');
-//Route::any('buynumber','Content\ContentController@buynumber');
-Route::any('cart','Cart\CartController@cart');
-Route::any('del','Cart\CartController@del');
-Route::any('showNum','Cart\CartController@showNum');
-Route::any('allDel','Cart\CartController@allDel');
-Route::any('textbox','Cart\CartController@textBox');
-Route::any('payment','Cart\CartController@payment');
-Route::any('payAll','Payment\PaymentController@payAll');
-Route::any('address','Address\AddressController@address');
-Route::any('addreAdd','Address\AddressController@addreAdd');
-Route::any('addrDel','Address\AddressController@addrDel');
-Route::any('addreDo','Address\AddressController@addreDo');
-Route::any('defa','Address\AddressController@defa');
-Route::any('addp','Address\AddressController@addp');
-Route::any('addUpd','Address\AddressController@addUpd');
-Route::any('cord','Address\AddressController@Cord');
-Route::any('showIndex','Payment\PaymentController@showIndex');
-Route::any('pay','Payment\PaymentController@pay');
-Route::any('sell','Payment\PaymentController@sell');
-Route::any('tell','Payment\PaymentController@tell');
-Route::any('result','Payment\PaymentController@result');
-Route::any('paysucc','Payment\PaymentController@paySucc');
-
-
-Route::any('check','WeiXin\WeiXinController@check');
-Route::any('redis','WeiXin\WeiXinController@redis');
-Route::any('Attention',"Weixin\AttentionController@Attention");
-Route::any('accessYou',"Weixin\WeiXinController@accessToken");
-//
-
-
-Route::any('page','User\PageController@page');
-Route::any('token','User\PageController@token');
-Route::any('wshow','User\PageController@wshow');
-
-
-Route::any('DimeTest','Dimension\DimenSionController@DimeTest');
-Route::any('wstatus','Dimension\DimenSionController@wstatus');
-Route::any('checksign','Dimension\DimenSionController@checksign');
-Route::any('timSuccess','Dimension\DimenSionController@timSuccess');
-Route::any('accessDime','Dimension\DimenSionController@accessToken');
-
-
-
-
-//二维码支付
-Route::get('NativePay','Native\WeiXinPayController@NativePay');
-Route::post('payBack','Native\WeiXinPayController@payBack');
-
-
-
-
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -83,9 +11,16 @@ Route::post('payBack','Native\WeiXinPayController@payBack');
 |
 */
 
-//Route::get('/', function () {
-//    return view('welcome');
-//});
+Route::get('/', function () {
+    return view('welcome');
+//    echo phpinfo();
+
+});
+Route::get('mongo1','Mongo\MongoController@mongo1');
+Route::get('mongo2','Mongo\MongoController@mongo2');
+Route::get('mongo3','Mongo\MongoController@mongo3');
+Route::get('chat','Mongo\MongoController@chat');
+Route::get('chat1','Mongo\MongoController@chat1');
 
 //基本路由
 //Route::get('order1',function(){
