@@ -65,6 +65,7 @@
             ws.send(msg)
         })
 
+        
         ws.onmessage=function(result){
 //            console.log(result.data)
             $('#rea').append("<h5 style='color: #7ab5d3 ;'>"+result.data+"</h5>");
